@@ -69,6 +69,9 @@ export type ButtonName =
   | 'shape-ellipse'
   | 'shape-rectangle'
   | 'shape-line'
+  // surface group
+  | 'surfaces'
+  | 'surface-filled'
   // text group
   | 'text'
   // right

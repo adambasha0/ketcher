@@ -8,6 +8,7 @@ export const TYPE_REACTION_ARROW = 'reactionarrow';
 export const TYPE_REACTION = 'reaction';
 export const TYPE_R_GROUP = 'rgroup';
 export const TYPE_SHAPE = 'shape';
+export const TYPE_SURFACE = 'surface';
 
 export const DEFAULT_BONDS_MAIN_BUTTON_TEST_ID = 'bonds';
 
@@ -117,4 +118,8 @@ export const ShapeTool: toolType = {
   SHAPE_ELLIPSE: [1, 'shape-ellipse'],
   SHAPE_RECTANGLE: [2, 'shape-rectangle'],
   SHAPE_LINE: [3, 'shape-line'],
+};
+
+export const SurfaceTool: toolType = {
+  SURFACE_FILLED: [1, 'surface-filled'],
 };

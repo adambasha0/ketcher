@@ -110,6 +110,8 @@ import ShapeEllipseIcon from '../../../assets/icons/files/shape-ellipse.svg';
 import ShapeLineIcon from '../../../assets/icons/files/shape-line.svg';
 import ShapePolylineIcon from '../../../assets/icons/files/shape-polyline.svg';
 import ShapeRectangleIcon from '../../../assets/icons/files/shape-rectangle.svg';
+import Surfaces from '../../../assets/icons/files/surfaces.svg';
+import SurfaceFilled from '../../../assets/icons/files/surface-filled.svg';
 import Template0Icon from '../../../assets/icons/files/template-0.svg';
 import Template1Icon from '../../../assets/icons/files/template-1.svg';
 import Template2Icon from '../../../assets/icons/files/template-2.svg';
@@ -396,6 +398,8 @@ export const iconNameToIcon = {
   'zoom-reset': ZoomResetIcon,
   'shape-ellipse': ShapeEllipseIcon,
   'shape-rectangle': ShapeRectangleIcon,
+  surfaces: Surfaces,
+  'surface-filled': SurfaceFilled,
   'shape-polyline': ShapePolylineIcon,
   'shape-line': ShapeLineIcon,
   'not-found': NotFoundIcon,

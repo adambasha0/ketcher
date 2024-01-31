@@ -306,6 +306,17 @@ const toolActions = {
     action: { tool: 'simpleobject', opts: SimpleObjectMode.line },
     hidden: (options) => isHidden(options, 'shape-line'),
   },
+  surfaces: {
+    shortcut: 'Alt+t',
+    title: 'Surface Tool',
+    action: { tool: 'surface' },
+    hidden: (options) => isHidden(options, 'surfaces'),
+  },
+  'surface-filled': {
+    title: 'Surface Filled',
+    action: { tool: 'simpleobject', opts: SimpleObjectMode.ellipse },
+    hidden: (options) => isHidden(options, 'surface-filled'),
+  },
   text: {
     shortcut: 'Alt+t',
     title: 'Add text',

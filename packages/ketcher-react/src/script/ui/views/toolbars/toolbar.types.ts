@@ -25,7 +25,8 @@ type LeftGroup =
   | 'sgroup'
   | 'rgroup'
   | 'shape'
-  | 'text';
+  | 'text'
+  | 'surface';
 
 type BottomGroup = 'template-common' | 'template-lib';
 
@@ -133,6 +134,9 @@ type LeftToolbarItemVariant =
   | 'shape-ellipse'
   | 'shape-rectangle'
   | 'shape-line'
+  // surface group
+  | 'surfaces'
+  | 'surface-filled'
   // text group
   | 'text';
 

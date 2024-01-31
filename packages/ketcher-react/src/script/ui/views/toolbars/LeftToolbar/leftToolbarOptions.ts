@@ -14,6 +14,8 @@ const shapeOptions: ToolbarItem[] = makeItems([
   'shape-line',
 ]);
 
+const surfaceOptions: ToolbarItem[] = makeItems(['surface-filled']);
+
 const selectOptions: ToolbarItem[] = makeItems([
   'select-rectangle',
   'select-lasso',
@@ -53,6 +55,7 @@ export {
   bondSpecial,
   bondStereo,
   shapeOptions,
+  surfaceOptions,
   selectOptions,
   arrowsOptions,
   mappingOptions,

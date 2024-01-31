@@ -6,6 +6,7 @@ import {
   ReactionMappingTool,
   RgroupTool,
   ShapeTool,
+  SurfaceTool,
 } from './types';
 import { selectNestedTool } from './selectNestedTool';
 export * from './helpers';
@@ -19,4 +20,5 @@ export {
   ReactionMappingTool,
   RgroupTool,
   ShapeTool,
+  SurfaceTool,
 };

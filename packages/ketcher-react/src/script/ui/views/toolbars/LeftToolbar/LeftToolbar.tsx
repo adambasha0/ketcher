@@ -31,12 +31,14 @@ import {
   rGroupOptions,
   selectOptions,
   shapeOptions,
+  surfaceOptions,
 } from './leftToolbarOptions';
 
 import { ArrowScroll } from '../ArrowScroll';
 import { Bond } from './Bond';
 import { RGroup } from './RGroup';
 import { Shape } from './Shape';
+import { Surface } from './Surface';
 import classes from './LeftToolbar.module.less';
 import clsx from 'clsx';
 import { useInView } from 'react-intersection-observer';
@@ -106,6 +108,8 @@ const LeftToolbar = (props: Props) => {
               return <RGroup {...rest} key={item.id} />;
             case 'shapes':
               return <Shape {...rest} key={item.id} />;
+            case 'surfaces':
+              return <Surface {...rest} key={item.id} />;
             case 'bonds':
               return (
                 <Item
@@ -185,7 +189,11 @@ const LeftToolbar = (props: Props) => {
         <div ref={endRef}>
           <Group
             className={classes.groupItem}
-            items={[{ id: 'shapes', options: shapeOptions }, { id: 'text' }]}
+            items={[
+              { id: 'shapes', options: shapeOptions },
+              { id: 'surfaces', options: surfaceOptions },
+              { id: 'text' },
+            ]}
           />
         </div>
       </div>

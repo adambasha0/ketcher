@@ -6,6 +6,7 @@ const toolsWithoutTitles = [
   'reaction-mapping-tools',
   'rgroup',
   'shapes',
+  'surfaces',
 ];
 const isToolWithTitle = (tool) => !toolsWithoutTitles.includes(tool);
 const toolsWithTitles = Object.keys(toolActions).filter(isToolWithTitle);

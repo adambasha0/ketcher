@@ -134,6 +134,7 @@ const ToolbarMultiToolItem = (props: Props) => {
 
   const [Component, portalClassName] = chooseMultiTool(variant);
   const iconName = getIconName(currentId);
+  console.log(iconName, currentId);
   return displayMultiToolItem && iconName ? (
     <div
       ref={ref}

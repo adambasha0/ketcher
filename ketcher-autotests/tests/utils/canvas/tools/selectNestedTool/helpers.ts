@@ -7,6 +7,7 @@ import {
   TYPE_REACTION,
   TYPE_R_GROUP,
   TYPE_SHAPE,
+  TYPE_SURFACE,
   BondTool,
   SelectTool,
   RotateTool,
@@ -14,6 +15,7 @@ import {
   ReactionMappingTool,
   RgroupTool,
   ShapeTool,
+  SurfaceTool,
 } from './types';
 import { delay, DELAY_IN_SECONDS } from '@tests/utils';
 
@@ -65,6 +67,9 @@ export const getToolType = (toolName: string) => {
       break;
     case TYPE_SHAPE:
       toolType = ShapeTool;
+      break;
+    case TYPE_SURFACE:
+      toolType = SurfaceTool;
       break;
   }
 
