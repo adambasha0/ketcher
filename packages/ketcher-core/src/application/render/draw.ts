@@ -32,6 +32,24 @@ function rectangle(paper: RaphaelPaper, points: [Vec2, Vec2]) {
   );
 }
 
+function filledRectangle(paper, points) {
+  // Calculate coordinates and dimensions of the rectangle
+  const x = Math.min(points[0].x, points[1].x);
+  const y = Math.min(points[0].y, points[1].y);
+  const width = Math.abs(points[1].x - points[0].x);
+  const height = Math.abs(points[1].y - points[0].y);
+
+  const rect = paper.rect(x, y, width, height);
+  // Set attributes for the rectangle
+  rect.attr({
+    'stroke-width': 2,
+    'stroke-dasharray': '-',
+    fill: 'yellow',
+  });
+
+  return rect;
+}
+
 function rectangleArrowHighlightAndSelection(
   _paper: RaphaelPaper,
   { pos: [start], height }: ArrowItem,
@@ -61,6 +79,17 @@ function ellipse(paper: RaphaelPaper, points: [Vec2, Vec2]) {
     Math.abs(rx),
     Math.abs(ry),
   );
+}
+
+function filledLine(paper: RaphaelPaper, points: [Vec2, Vec2]) {
+  const path = ['M', points[0].x, points[0].y];
+  path.push('L', points[1].x, points[1].y);
+  const filledLine = paper.path(path).attr({
+    stroke: 'black',
+    'stroke-width': 9,
+    'stroke-dasharray': '-',
+  });
+  return filledLine;
 }
 
 function polyline(paper: RaphaelPaper, points: Vec2[]) {
@@ -1622,6 +1651,8 @@ export default {
   ellipse,
   rectangle,
   rectangleArrowHighlightAndSelection,
+  filledLine,
+  filledRectangle,
   polyline,
   line,
   rgroupAttachmentPoint,

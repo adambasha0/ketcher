@@ -77,6 +77,7 @@ class ReSimpleObject extends ReObject {
         }
         break;
       }
+      case SimpleObjectMode.filledRectangle:
       case SimpleObjectMode.rectangle: {
         const topX = Math.min(pos[0].x, pos[1].x);
         const topY = Math.min(pos[0].y, pos[1].y);
@@ -118,7 +119,8 @@ class ReSimpleObject extends ReObject {
         dist = Math.min(...distances);
         break;
       }
-      case SimpleObjectMode.line: {
+      case SimpleObjectMode.line:
+      case SimpleObjectMode.filledLine: {
         dist = calculateDistanceToLine(pos, point);
         break;
       }
@@ -155,6 +157,8 @@ class ReSimpleObject extends ReObject {
     const refPoints: Array<Vec2> = [];
     switch (this.item.mode) {
       case SimpleObjectMode.ellipse:
+      case SimpleObjectMode.filledLine:
+      case SimpleObjectMode.filledRectangle:
       case SimpleObjectMode.rectangle: {
         const p0: Vec2 = new Vec2(
           Math.min(this.item.pos[0].x, this.item.pos[1].x),
@@ -247,6 +251,7 @@ class ReSimpleObject extends ReObject {
         break;
       }
 
+      case SimpleObjectMode.filledRectangle:
       case SimpleObjectMode.rectangle: {
         const outerRect = render.paper.rect(
           tfx(Math.min(point[0].x, point[1].x) - scaleFactor / 8),
@@ -298,7 +303,8 @@ class ReSimpleObject extends ReObject {
 
         break;
       }
-      case SimpleObjectMode.line: {
+      case SimpleObjectMode.line:
+      case SimpleObjectMode.filledLine: {
         // TODO: reuse this code for polyline
         const poly: Array<string | number> = [];
 
@@ -449,6 +455,14 @@ function generatePath(mode: SimpleObjectMode, paper, pos: [Vec2, Vec2]): any {
     }
     case SimpleObjectMode.line: {
       path = draw.line(paper, pos);
+      break;
+    }
+    case SimpleObjectMode.filledLine: {
+      path = draw.filledLine(paper, pos);
+      break;
+    }
+    case SimpleObjectMode.filledRectangle: {
+      path = draw.filledRectangle(paper, pos);
       break;
     }
     default: {

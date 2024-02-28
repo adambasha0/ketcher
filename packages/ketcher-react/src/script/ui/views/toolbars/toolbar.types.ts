@@ -137,6 +137,7 @@ type LeftToolbarItemVariant =
   // surface group
   | 'surfaces'
   | 'surface-filled'
+  | 'rectangle-surface'
   // text group
   | 'text';
 

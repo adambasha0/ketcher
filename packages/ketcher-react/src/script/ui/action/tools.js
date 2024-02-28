@@ -314,8 +314,13 @@ const toolActions = {
   },
   'surface-filled': {
     title: 'Surface Filled',
-    action: { tool: 'simpleobject', opts: SimpleObjectMode.ellipse },
+    action: { tool: 'simpleobject', opts: SimpleObjectMode.filledLine },
     hidden: (options) => isHidden(options, 'surface-filled'),
+  },
+  'rectangle-surface': {
+    title: 'Rectangle Surface',
+    action: { tool: 'simpleobject', opts: SimpleObjectMode.filledRectangle },
+    hidden: (options) => isHidden(options, 'ractangle-surface'),
   },
   text: {
     shortcut: 'Alt+t',

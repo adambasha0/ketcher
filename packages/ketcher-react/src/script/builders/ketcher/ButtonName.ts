@@ -72,6 +72,7 @@ export type ButtonName =
   // surface group
   | 'surfaces'
   | 'surface-filled'
+  | 'rectangle-surface'
   // text group
   | 'text'
   // right

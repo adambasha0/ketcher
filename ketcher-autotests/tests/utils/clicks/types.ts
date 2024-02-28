@@ -84,6 +84,7 @@ export type DropdownToolIds =
   | 'shape-line'
   // surface
   | 'surface-filled'
+  | 'rectangle-surface'
   // select
   | 'select-rectangle'
   | 'select-lasso'

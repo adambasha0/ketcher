@@ -14,7 +14,10 @@ const shapeOptions: ToolbarItem[] = makeItems([
   'shape-line',
 ]);
 
-const surfaceOptions: ToolbarItem[] = makeItems(['surface-filled']);
+const surfaceOptions: ToolbarItem[] = makeItems([
+  'surface-filled',
+  'rectangle-surface',
+]);
 
 const selectOptions: ToolbarItem[] = makeItems([
   'select-rectangle',

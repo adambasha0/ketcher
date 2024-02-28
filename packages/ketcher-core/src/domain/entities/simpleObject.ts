@@ -20,6 +20,8 @@ export enum SimpleObjectMode {
   ellipse = 'ellipse',
   rectangle = 'rectangle',
   line = 'line',
+  filledLine = 'filledLine',
+  filledRectangle = 'filledRectangle',
 }
 
 export interface SimpleObjectAttributes {

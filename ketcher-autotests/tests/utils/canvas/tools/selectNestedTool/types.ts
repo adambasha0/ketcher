@@ -122,4 +122,5 @@ export const ShapeTool: toolType = {
 
 export const SurfaceTool: toolType = {
   SURFACE_FILLED: [1, 'surface-filled'],
+  RECTANGLE_SURFACE: [2, 'rectangle-surface'],
 };

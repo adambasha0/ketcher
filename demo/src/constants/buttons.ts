@@ -58,6 +58,7 @@ export const allButtons = [
   // surface group
   'surfaces',
   'surface-filled',
+  'rectangle-surface',
   // text group
   'text',
   // right
@@ -123,6 +124,7 @@ export const buttonLabelMap = {
   'shape-line': 'Shape Line',
   surfaces: 'Surface Tools',
   'surface-filled': 'Surface filled',
+  'rectangle-surface': 'Rectangle Surface',
   text: 'Add Text Tool',
   'enhanced-stereo': 'Stereochemistry',
   fullscreen: 'Full screen mode',
