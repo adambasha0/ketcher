@@ -124,7 +124,7 @@ test.describe('Calculated Values Tools', () => {
     */
     test.fail();
     let point: { x: number; y: number };
-    await openFileAndAddToCanvas('query-structure.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V2000/query-structure.mol', page);
 
     point = await getBondByIndex(page, { type: BondType.SINGLE }, 3);
     await page.keyboard.down('Shift');
@@ -178,7 +178,7 @@ test.describe('Calculated Values Tools', () => {
     */
     const xDelta = 300;
     const yDelta = 600;
-    await openFileAndAddToCanvas('ritalin.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V2000/ritalin.mol', page);
     const { x, y } = await getCoordinatesOfTheMiddleOfTheScreen(page);
     await dragMouseTo(x + xDelta, y - yDelta, page);
     await selectTopPanelButton(TopPanelButton.Calculated, page);
@@ -220,7 +220,7 @@ test.describe('Calculated Values Tools', () => {
     For our example: C5H10R#. All other fields contain 'error:
     Cannot calculate mass for structure with pseudoatoms, template atoms or RSites' message.
     */
-    await openFileAndAddToCanvas('r-group-label.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V2000/r-group-label.mol', page);
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -234,7 +234,7 @@ test.describe('Calculated Values Tools', () => {
     */
     const xDelta = 200;
     const yDelta = 200;
-    await openFileAndAddToCanvas('r-group-label.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V2000/r-group-label.mol', page);
     const { x, y } = await getCoordinatesOfTheMiddleOfTheScreen(page);
     await dragMouseTo(x + xDelta, y + yDelta, page);
     await selectTopPanelButton(TopPanelButton.Calculated, page);
@@ -246,7 +246,7 @@ test.describe('Calculated Values Tools', () => {
     Description: Regardless of the method of selection all fields contain
     'Cannot calculate properties for RGroups' message.
     */
-    await openFileAndAddToCanvas('r-group-all-chain.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V2000/r-group-all-chain.mol', page);
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -260,7 +260,7 @@ test.describe('Calculated Values Tools', () => {
     */
     const xDelta = 100;
     const yDelta = 100;
-    await openFileAndAddToCanvas('r-group-all-chain.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V2000/r-group-all-chain.mol', page);
     const { x, y } = await getCoordinatesOfTheMiddleOfTheScreen(page);
     await dragMouseTo(x + xDelta, y + yDelta, page);
     await selectTopPanelButton(TopPanelButton.Calculated, page);
@@ -315,7 +315,10 @@ test.describe('Calculated Values Tools', () => {
     Elemental Analysis:
     error: Cannot calculate mass for structure with repeating units
     */
-    await openFileAndAddToCanvas('sru-polymer-structure.mol', page);
+    await openFileAndAddToCanvas(
+      'Molfiles-V2000/sru-polymer-structure.mol',
+      page,
+    );
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -335,7 +338,10 @@ test.describe('Calculated Values Tools', () => {
     Elemental Analysis:
     C 84.7 H 15.3
     */
-    await openFileAndAddToCanvas('multiple-group-structure.mol', page);
+    await openFileAndAddToCanvas(
+      'Molfiles-V2000/multiple-group-structure.mol',
+      page,
+    );
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -354,7 +360,10 @@ test.describe('Calculated Values Tools', () => {
     Elemental Analysis:
     C 84.6 H 15.4
     */
-    await openFileAndAddToCanvas('superatom-structure.mol', page);
+    await openFileAndAddToCanvas(
+      'Molfiles-V2000/superatom-structure.mol',
+      page,
+    );
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -373,7 +382,10 @@ test.describe('Calculated Values Tools', () => {
     Elemental Analysis:
     C 84.9 H 15.1
     */
-    await openFileAndAddToCanvas('data-s-group-structure.mol', page);
+    await openFileAndAddToCanvas(
+      'Molfiles-V2000/data-s-group-structure.mol',
+      page,
+    );
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -560,7 +572,7 @@ test.describe('Calculated Values Tools', () => {
     Elemental Analysis:
     C 78.3 H 4.4 O 17.4
     */
-    await openFileAndAddToCanvas('hetero-adduct.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V2000/hetero-adduct.mol', page);
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -591,7 +603,7 @@ test.describe('Calculated Values Tools', () => {
     Description: If the selected object contains the Query Feature all fields contain the 'Cannot
     calculate properties for structures with query features' message.
     */
-    await openFileAndAddToCanvas('dgln-atomlist.mol', page);
+    await openFileAndAddToCanvas('Molfiles-V3000/dgln-atomlist.mol', page);
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -608,7 +620,10 @@ test.describe('Calculated Values Tools', () => {
     Elemental Analysis:
     [C 40.0 H 6.7 O 53.3]+[C 52.1 H 13.1 O 34.7] > [C 54.5 H 9.2 O 36.3]+[H 11.2 O 88.8]
     */
-    await openFileAndAddToCanvas('reaction-plus-and-arrows.rxn', page);
+    await openFileAndAddToCanvas(
+      'Rxn-V2000/reaction-plus-and-arrows.rxn',
+      page,
+    );
     await selectTopPanelButton(TopPanelButton.Calculated, page);
   });
 
@@ -651,7 +666,7 @@ test.describe('Calculated Values Tools', () => {
     C 77.3 H 22.7
     */
     await openFileAndAddToCanvas(
-      'ethane-with-valence-and-stereobond.mol',
+      'Molfiles-V2000/ethane-with-valence-and-stereobond.mol',
       page,
     );
     await selectTopPanelButton(TopPanelButton.Calculated, page);

@@ -13,10 +13,12 @@ import {
   receiveFileComparisonData,
   saveToFile,
   selectEraseTool,
+  selectOptionInDropdown,
   selectTopPanelButton,
   takeEditorScreenshot,
   waitForPageInit,
   waitForRender,
+  selectSnakeLayoutModeTool,
 } from '@utils';
 
 test.describe('Import-Saving-Files', () => {
@@ -61,7 +63,7 @@ test.describe('Import-Saving-Files', () => {
       'Molfiles-V3000/dna-mod-base-sugar-phosphate-example.mol',
       page,
     );
-    await page.getByTestId('select-rectangle-button').click();
+    await page.getByTestId('select-rectangle').click();
     await page.getByText('cdaC').locator('..').hover();
     await takeEditorScreenshot(page);
   });
@@ -310,7 +312,10 @@ test.describe('Import-Saving-Files', () => {
     Description: System does not let uploading corrupted .mol file
     */
     await selectTopPanelButton(TopPanelButton.Open, page);
-    await openFile('Molfiles-V3000/corrupted-file.mol', page);
+
+    const filename = 'Molfiles-V3000/corrupted-file.mol';
+    await openFile(filename, page);
+    await selectOptionInDropdown(filename, page);
     await pressButton(page, 'Add to Canvas');
     await takeEditorScreenshot(page);
   });
@@ -323,7 +328,7 @@ test.describe('Import-Saving-Files', () => {
     Description: Sequence of Peptides displaying according to snake view mockup.
     */
     await openFileAndAddToCanvas('KET/snake-mode-peptides.ket', page);
-    await page.getByTestId('snake-mode-button').click();
+    await selectSnakeLayoutModeTool(page);
     await takeEditorScreenshot(page);
   });
 
@@ -338,7 +343,7 @@ test.describe('Import-Saving-Files', () => {
       'Molfiles-V3000/snake-mode-peptides.mol',
       page,
     );
-    await page.getByTestId('snake-mode-button').click();
+    await selectSnakeLayoutModeTool(page);
     await takeEditorScreenshot(page);
   });
 
@@ -353,7 +358,7 @@ test.describe('Import-Saving-Files', () => {
       'Molfiles-V3000/snake-mode-peptides.mol',
       page,
     );
-    await page.getByTestId('snake-mode-button').click();
+    await selectSnakeLayoutModeTool(page);
     const expectedFile = await getMolfile(page);
     await saveToFile(
       'Molfiles-V3000/snake-mode-peptides-expected.mol',
@@ -537,7 +542,7 @@ test.describe('Base monomers on the canvas, their connection points and preview 
   for (const fileName of fileNames) {
     test(`for ${fileName}`, async ({ page }) => {
       await openFileAndAddToCanvas(`KET/Base-Templates/${fileName}.ket`, page);
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('R1').locator('..').hover();
       await takeEditorScreenshot(page);
 
@@ -590,7 +595,7 @@ test.describe('CHEM monomers on the canvas, their connection points and preview 
   for (const fileName of fileNames) {
     test(`for ${fileName}`, async ({ page }) => {
       await openFileAndAddToCanvas(`KET/CHEM-Templates/${fileName}.ket`, page);
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 
@@ -646,7 +651,7 @@ test.describe('Peptide monomers on the canvas, their connection points and previ
         `KET/Peptide-Templates/${fileName}.ket`,
         page,
       );
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 
@@ -702,7 +707,7 @@ test.describe('Phosphate monomers on the canvas, their connection points and pre
         `KET/Phosphate-Templates/${fileName}.ket`,
         page,
       );
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 
@@ -755,7 +760,7 @@ test.describe('Sugar monomers on the canvas, their connection points and preview
   for (const fileName of fileNames) {
     test(`for ${fileName}`, async ({ page }) => {
       await openFileAndAddToCanvas(`KET/Sugar-Templates/${fileName}.ket`, page);
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 
@@ -804,7 +809,7 @@ test.describe('Base monomers on the canvas, their connection points and preview 
         `Molfiles-V3000/Base-Templates/${fileName}.mol`,
         page,
       );
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('R1').locator('..').hover();
       await takeEditorScreenshot(page);
 
@@ -862,7 +867,7 @@ test.describe('CHEM monomers on the canvas, their connection points and preview 
         `Molfiles-V3000/CHEM-Templates/${fileName}.mol`,
         page,
       );
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 
@@ -920,7 +925,7 @@ test.describe('Peptide monomers on the canvas, their connection points and previ
         `Molfiles-V3000/Peptide-Templates/${fileName}.mol`,
         page,
       );
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 
@@ -978,7 +983,7 @@ test.describe('Phosphate monomers on the canvas, their connection points and pre
         `Molfiles-V3000/Phosphate-Templates/${fileName}.mol`,
         page,
       );
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 
@@ -1036,7 +1041,7 @@ test.describe('Sugar monomers on the canvas, their connection points and preview
         `Molfiles-V3000/Sugar-Templates/${fileName}.mol`,
         page,
       );
-      await page.getByTestId('single-bond-button').click();
+      await page.getByTestId('single-bond').click();
       await page.getByText('(R').locator('..').first().hover();
       await takeEditorScreenshot(page);
 

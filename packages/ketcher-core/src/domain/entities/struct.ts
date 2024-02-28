@@ -140,6 +140,7 @@ export class Struct {
     simpleObjectsSet?: Pile<number> | null,
     textsSet?: Pile<number> | null,
     rgroupAttachmentPointSet?: Pile<number> | null,
+    bidMap?: Map<number, number> | null,
   ): Struct {
     return this.mergeInto(
       new Struct(),
@@ -151,6 +152,7 @@ export class Struct {
       simpleObjectsSet,
       textsSet,
       rgroupAttachmentPointSet,
+      bidMap,
     );
   }
 
@@ -203,6 +205,7 @@ export class Struct {
     simpleObjectsSet?: Pile<number> | null,
     textsSet?: Pile<number> | null,
     rgroupAttachmentPointSet?: Pile<number> | null,
+    bidMapEntity?: Map<number, number> | null,
   ): Struct {
     atomSet = atomSet || new Pile<number>(this.atoms.keys());
     bondSet = bondSet || new Pile<number>(this.bonds.keys());
@@ -213,6 +216,7 @@ export class Struct {
       rgroupAttachmentPointSet ||
       new Pile<number>(this.rgroupAttachmentPoints.keys());
     aidMap = aidMap || new Map();
+    const bidMap = bidMapEntity || new Map();
 
     bondSet = bondSet.filter((bid) => {
       const bond = this.bonds.get(bid)!;
@@ -273,12 +277,12 @@ export class Struct {
       }
     });
 
-    const bidMap = new Map();
     this.bonds.forEach((bond, bid) => {
       if (bondSet!.has(bid)) bidMap.set(bid, cp.bonds.add(bond.clone(aidMap!)));
     });
 
-    this.sgroups.forEach((sg) => {
+    const sgroupIdMap = {};
+    this.sgroups.forEach((sg, sgroupId) => {
       if (sg.atoms.some((aid) => !atomSet!.has(aid))) return;
       const oldSgroup = sg;
 
@@ -289,6 +293,8 @@ export class Struct {
 
       const id = cp.sgroups.add(sg);
       sg.id = id;
+
+      sgroupIdMap[sgroupId] = id;
 
       sg.atoms.forEach((aid) => {
         const atom = cp.atoms.get(aid);
@@ -303,7 +309,10 @@ export class Struct {
 
     this.functionalGroups.forEach((fg) => {
       if (fg.relatedSGroup.atoms.some((aid) => !atomSet!.has(aid))) return;
-      fg = FunctionalGroup.clone(fg);
+      const sgroup = cp.sgroups.get(sgroupIdMap[fg.relatedSGroupId]);
+      // It is possible that there is no sgroup in case of templates library rendering
+      // Sgroup is deleteing before render to show templates without brackets (see RenderStruct.prepareStruct method)
+      fg = sgroup ? new FunctionalGroup(sgroup) : FunctionalGroup.clone(fg);
       cp.functionalGroups.add(fg);
     });
 
@@ -800,22 +809,19 @@ export class Struct {
     });
 
     this.texts.forEach((item) => {
-      // Scale text only for reactions - i.e file contains reaction arrows
-      const isReactionStruct = this.rxnArrows.size;
-      if (isReactionStruct) {
-        item.pos = item.pos.map((p) => p.scaled(scale));
-        item.position = item.position.scaled(scale);
-      }
+      item.pos = item.pos.map((p) => p.scaled(scale));
+      item.position = item.position.scaled(scale);
+    });
+
+    this.simpleObjects.forEach((simpleObjects) => {
+      simpleObjects.pos = simpleObjects.pos.map((p) => p.scaled(scale));
     });
   }
 
   rescale() {
     let avg = this.getAvgBondLength();
-    if (avg < 0 && !this.isReaction) {
-      // TODO [MK] this doesn't work well for reactions as the distances between
-      // the atoms in different components are generally larger than those between atoms of a single component
-      // (KETCHER-341)
-      avg = this.getAvgClosestAtomDistance();
+    if (avg <= 0) {
+      return;
     }
     if (avg < 1e-3) avg = 1;
 
@@ -1247,5 +1253,23 @@ export class Struct {
         (target.map === 'atoms' && this.isAtomFromMacromolecule(target.id)) ||
         (target.map === 'bonds' && this.isBondFromMacromolecule(target.id)))
     );
+  }
+
+  disableInitiallySelected(): void {
+    // Those fields are used only in serialization/deserialization phase
+    // so we are disabling them to avoid confusion
+    this.atoms.changeInitiallySelectedPropertiesForPool(true);
+    this.bonds.changeInitiallySelectedPropertiesForPool(true);
+    this.rxnPluses.changeInitiallySelectedPropertiesForPool(true);
+    this.rxnArrows.changeInitiallySelectedPropertiesForPool(true);
+    this.texts.changeInitiallySelectedPropertiesForPool(true);
+  }
+
+  enableInitiallySelected(): void {
+    this.atoms.changeInitiallySelectedPropertiesForPool();
+    this.bonds.changeInitiallySelectedPropertiesForPool();
+    this.rxnPluses.changeInitiallySelectedPropertiesForPool();
+    this.rxnArrows.changeInitiallySelectedPropertiesForPool();
+    this.texts.changeInitiallySelectedPropertiesForPool();
   }
 }

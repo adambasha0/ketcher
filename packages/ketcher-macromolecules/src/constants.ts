@@ -25,9 +25,6 @@ export type LibraryNameType =
   | typeof MONOMER_LIBRARY_FAVORITES
   | keyof typeof MONOMER_TYPES;
 
-export const EditorClassName = 'Ketcher-polymer-editor-root';
-export const EditorQuerySelector = `.${EditorClassName}`;
-
 export const preview = {
   width: 230,
   height: 230,

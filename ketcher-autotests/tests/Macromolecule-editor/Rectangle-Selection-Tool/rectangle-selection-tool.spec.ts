@@ -1,7 +1,7 @@
 import { Page, test } from '@playwright/test';
 import {
   addChemOnCanvas,
-  addMonomerToCanvas,
+  addSingleMonomerToCanvas,
   addPeptideOnCanvas,
   dragMouseTo,
   getCoordinatesOfTheMiddleOfTheScreen,
@@ -12,6 +12,7 @@ import {
   selectSingleBondTool,
   takeEditorScreenshot,
   waitForPageInit,
+  selectSnakeLayoutModeTool,
 } from '@utils';
 import { turnOnMacromoleculesEditor } from '@utils/macromolecules';
 import { bondTwoMonomers } from '@utils/macromolecules/polymerBond';
@@ -49,7 +50,7 @@ test.describe('Rectangle Selection Tool', () => {
     const MONOMER_NAME = 'Tza___3-thiazolylalanine';
     const MONOMER_ALIAS = 'Tza';
 
-    const peptide1 = await addMonomerToCanvas(
+    const peptide1 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -57,7 +58,7 @@ test.describe('Rectangle Selection Tool', () => {
       300,
       0,
     );
-    const peptide2 = await addMonomerToCanvas(
+    const peptide2 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -65,7 +66,7 @@ test.describe('Rectangle Selection Tool', () => {
       400,
       1,
     );
-    const peptide3 = await addMonomerToCanvas(
+    const peptide3 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -73,7 +74,7 @@ test.describe('Rectangle Selection Tool', () => {
       500,
       2,
     );
-    const peptide4 = await addMonomerToCanvas(
+    const peptide4 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -187,7 +188,7 @@ test.describe('Rectangle Selection Tool', () => {
     const MONOMER_NAME = 'Tza___3-thiazolylalanine';
     const MONOMER_ALIAS = 'Tza';
 
-    const peptide1 = await addMonomerToCanvas(
+    const peptide1 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -195,7 +196,7 @@ test.describe('Rectangle Selection Tool', () => {
       300,
       0,
     );
-    const peptide2 = await addMonomerToCanvas(
+    const peptide2 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -203,7 +204,7 @@ test.describe('Rectangle Selection Tool', () => {
       400,
       1,
     );
-    const peptide3 = await addMonomerToCanvas(
+    const peptide3 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -211,7 +212,7 @@ test.describe('Rectangle Selection Tool', () => {
       500,
       2,
     );
-    const peptide4 = await addMonomerToCanvas(
+    const peptide4 = await addSingleMonomerToCanvas(
       page,
       MONOMER_NAME,
       MONOMER_ALIAS,
@@ -381,9 +382,9 @@ test.describe('Rectangle Selection Tool', () => {
     await selectRectangleSelectionTool(page);
     await page.getByText('Nal').locator('..').first().hover();
     await dragMouseTo(x, y, page);
-    await page.getByTestId('undo-button').click();
+    await page.getByTestId('undo').click();
     await takeEditorScreenshot(page);
-    await page.getByTestId('redo-button').click();
+    await page.getByTestId('redo').click();
     await takeEditorScreenshot(page);
   });
 
@@ -397,7 +398,7 @@ test.describe('Rectangle Selection Tool', () => {
     const x = 900;
     const y = 500;
     await openFileAndAddToCanvas('KET/snake-mode-peptides.ket', page);
-    await page.getByTestId('snake-mode-button').click();
+    await selectSnakeLayoutModeTool(page);
     await page.keyboard.press('Control+a');
     await page.getByText('Hhs').locator('..').first().hover();
     await dragMouseTo(x, y, page);
@@ -428,9 +429,9 @@ test.describe('Rectangle Selection Tool', () => {
     */
     await openFileAndAddToCanvas('KET/all-kind-of-monomers.ket', page);
     await page.keyboard.press('Control+a');
-    await page.getByTestId('erase-button').click();
+    await page.getByTestId('erase').click();
     await takeEditorScreenshot(page);
-    await page.getByTestId('undo-button').click();
+    await page.getByTestId('undo').click();
     await takeEditorScreenshot(page);
   });
 });

@@ -52,7 +52,7 @@ import {
   selectMonomers,
   setFavoriteMonomersFromLocalStorage,
 } from 'state/library';
-import { useAppDispatch, useAppSelector, useSnakeMode } from 'hooks';
+import { useAppDispatch, useAppSelector } from 'hooks';
 import {
   closeErrorTooltip,
   openErrorTooltip,
@@ -64,7 +64,7 @@ import {
   ModalContainer,
 } from 'components/modal/modalContainer';
 import { DeepPartial } from './types';
-import { EditorClassName } from './constants';
+import { EditorClassName } from 'ketcher-react';
 import { Snackbar } from '@mui/material';
 import {
   StyledIconButton,
@@ -93,6 +93,7 @@ import {
   clearFavorites,
 } from 'state/rna-builder';
 import { IRnaPreset } from 'components/monomerLibrary/RnaBuilder/types';
+import { LayoutModeButton } from 'components/LayoutModeButton';
 
 const muiTheme = createTheme(muiOverrides);
 
@@ -265,6 +266,7 @@ function Editor({ theme, togglerComponent }: EditorProps) {
     <>
       <Layout>
         <Layout.Top shortened={isMonomerLibraryHidden}>
+          <LayoutModeButton />
           {togglerComponent}
           <FullscreenButton />
         </Layout.Top>
@@ -334,13 +336,10 @@ function MenuComponent() {
   const activeTool = useAppSelector(selectEditorActiveTool);
   const editor = useAppSelector(selectEditor);
   const activeMenuItems = [activeTool];
-  const isSnakeMode = useSnakeMode();
-  if (isSnakeMode) activeMenuItems.push('snake-mode');
+
   const menuItemChanged = (name) => {
     if (modalComponentList[name]) {
       dispatch(openModal(name));
-    } else if (name === 'snake-mode') {
-      editor.events.selectMode.dispatch(!isSnakeMode);
     } else if (name === 'undo' || name === 'redo') {
       editor.events.selectHistory.dispatch(name);
     } else if (!['zoom-in', 'zoom-out', 'zoom-reset'].includes(name)) {
@@ -364,19 +363,19 @@ function MenuComponent() {
         <Menu.Item
           itemId="clear"
           title={`Clear Canvas (${shortcuts.clear})`}
-          testId="clear-canvas-button"
+          testId="clear-canvas"
         />
       </Menu.Group>
       <Menu.Group>
         <Menu.Item
           itemId="undo"
           title={`Undo (${shortcuts.undo})`}
-          testId="undo-button"
+          testId="undo"
         />
         <Menu.Item
           itemId="redo"
           title={`Redo (${shortcuts.redo})`}
-          testId="redo-button"
+          testId="redo"
         />
       </Menu.Group>
       <Menu.Group>
@@ -387,26 +386,19 @@ function MenuComponent() {
         <Menu.Item
           itemId="erase"
           title={`Erase (${shortcuts.erase})`}
-          testId="erase-button"
+          testId="erase"
         />
         <Menu.Item
           itemId="select-rectangle"
           title="Select Rectangle"
-          testId="select-rectangle-button"
+          testId="select-rectangle"
         />
       </Menu.Group>
       <Menu.Group>
         <Menu.Item
           itemId="bond-single"
           title="Single Bond (1)"
-          testId="single-bond-button"
-        />
-      </Menu.Group>
-      <Menu.Group divider>
-        <Menu.Item
-          itemId="snake-mode"
-          title="Snake mode"
-          testId="snake-mode-button"
+          testId="single-bond"
         />
       </Menu.Group>
       <Menu.Group>

@@ -99,6 +99,34 @@ export function removeStructAction(): {
   return onAction(savedSelectedTool || tools['select-rectangle'].action);
 }
 
+export const getSelectionFromStruct = (struct) => {
+  const selection = {};
+  [
+    'atoms',
+    'bonds',
+    'enhancedFlags',
+    'rxnPluses',
+    'rxnArrows',
+    'texts',
+    'rgroupAttachmentPoints',
+    'simpleObjects',
+  ].forEach((selectionEntity) => {
+    if (struct && struct[selectionEntity]) {
+      const selected: number[] = [];
+      struct[selectionEntity].forEach((value, key) => {
+        if (
+          typeof value.getInitiallySelected === 'function' &&
+          value.getInitiallySelected()
+        ) {
+          selected.push(key);
+        }
+      });
+      selection[selectionEntity] = selected;
+    }
+  });
+  return selection;
+};
+
 export function load(struct: Struct, options?) {
   return async (dispatch, getState) => {
     const state = getState();
@@ -174,10 +202,7 @@ export function load(struct: Struct, options?) {
           dispatch(onAction({ tool: 'paste', opts: parsedStruct }));
         }
       } else {
-        editor.struct(
-          parsedStruct,
-          method === 'layout' || method === 'toggleExplicitHydrogens',
-        );
+        editor.struct(parsedStruct, method === 'layout');
       }
 
       editor.zoomAccordingContent(parsedStruct);
@@ -186,7 +211,11 @@ export function load(struct: Struct, options?) {
       if (!isPaste && !isIndigoFunctionCalled) {
         editor.centerStruct();
       }
-
+      if (!fragment) {
+        // do not update selection if fragment is added
+        editor.selection(getSelectionFromStruct(editor.struct()));
+      }
+      editor.struct().disableInitiallySelected();
       dispatch(setAnalyzingFile(false));
       dispatch({ type: 'MODAL_CLOSE' });
     } catch (e: any) {

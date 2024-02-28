@@ -15,6 +15,10 @@
  ***************************************************************************/
 
 import { Point, Vec2 } from './vec2';
+import {
+  BaseMicromoleculeEntity,
+  initiallySelectedType,
+} from 'domain/entities/BaseMicromoleculeEntity';
 
 export enum SimpleObjectMode {
   ellipse = 'ellipse',
@@ -27,13 +31,15 @@ export enum SimpleObjectMode {
 export interface SimpleObjectAttributes {
   mode: SimpleObjectMode;
   pos?: Array<Point>;
+  initiallySelected?: initiallySelectedType;
 }
 
-export class SimpleObject {
+export class SimpleObject extends BaseMicromoleculeEntity {
   pos: Array<Vec2>;
   mode: SimpleObjectMode;
 
   constructor(attributes?: SimpleObjectAttributes) {
+    super(attributes?.initiallySelected);
     this.pos = [];
 
     if (attributes?.pos) {
