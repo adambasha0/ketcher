@@ -260,6 +260,53 @@ class StructEditor extends Component {
     this.editor.render.unobserveCanvasResize();
   }
 
+  shapeOnMe() {
+    const parentElement = document.querySelector(
+      '._intermediateCanvas_6mm9g_128',
+    );
+    const svgElement = parentElement.querySelector('svg');
+
+    const textElements = this.editorRef.current.querySelectorAll('text');
+
+    // Iterate over the NodeList and log elements containing the letter "R" or "r"
+    textElements.forEach((element, index) => {
+      if (/r/i.test(element.textContent)) {
+        const x = element.getAttribute('x');
+        const y = element.getAttribute('y');
+        const transform = element.getAttribute('transform');
+        // console.log(`x: ${x}, y: ${y}, transform: ${transform}`);
+
+        if (svgElement) {
+          const svgElement = parentElement.querySelector('svg');
+          const circleId = `circle-${index}`; // Define a unique ID for the circle
+
+          // Remove existing circle with the same ID
+          const existingCircle = svgElement.querySelector(
+            `#myCirlceLove${element.textContent}`,
+          );
+          if (existingCircle) {
+            svgElement.removeChild(existingCircle);
+          }
+          // Create a new SVG circle element
+          const newCircle = document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            'circle',
+          );
+          newCircle.setAttribute('id', 'myCirlceLove' + element.textContent);
+          newCircle.setAttribute('cx', x);
+          newCircle.setAttribute('cy', y);
+          newCircle.setAttribute('r', '20');
+          newCircle.setAttribute('stroke', 'red');
+          newCircle.setAttribute('stroke-width', '3');
+          newCircle.setAttribute('fill', 'red');
+          newCircle.setAttribute('transform', transform);
+          // Append the new circle to the SVG
+          svgElement.appendChild(newCircle);
+        }
+      }
+    });
+  }
+
   render() {
     const {
       Tag = 'div',
@@ -308,6 +355,7 @@ class StructEditor extends Component {
           <div
             ref={this.editorRef}
             className={clsx(classes.intermediateCanvas)}
+            onMouseMove={() => this.shapeOnMe()}
           >
             {/* svg here */}
           </div>
