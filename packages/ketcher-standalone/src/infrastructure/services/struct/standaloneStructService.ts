@@ -36,6 +36,7 @@ import {
   OutputMessageWrapper,
   ExplicitHydrogensCommandData,
 } from './indigoWorker.types';
+
 import {
   AromatizeData,
   AromatizeResult,

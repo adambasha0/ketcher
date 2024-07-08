@@ -55,7 +55,6 @@ const ActionButton = (props: Props) => {
     dataTestId,
   } = props;
 
-  const context = useShapesContext();
   if (status.hidden) {
     return null;
   }

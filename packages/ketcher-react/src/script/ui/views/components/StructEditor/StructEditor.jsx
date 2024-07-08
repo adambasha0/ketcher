@@ -14,7 +14,7 @@
  * limitations under the License.
  ***************************************************************************/
 
-import React, { Component, createRef } from 'react';
+import { Component, createRef } from 'react';
 
 import Editor from '../../../../editor';
 import { LoadingCircles } from '../Spinner/LoadingCircles';
@@ -82,10 +82,10 @@ const shapesList = {
     height: 40,
     cx: 0,
     cy: 0,
-    fill: '#757070',
     stroke: 'rgb(186, 140, 0)',
     strokeWidth: 3,
     fill: 'rgb(255, 255, 255)',
+    // fill: '#757070',
   },
   APP: {
     type: 'circle',
@@ -355,9 +355,6 @@ class StructEditor extends Component {
       if (matches) {
         const x = element.getAttribute('x');
         const y = element.getAttribute('y');
-        const transform = element.getAttribute('transform');
-        // console.log(`x: ${x}, y: ${y}, transform: ${transform}`);
-
         if (svgElement) {
           const svgElement = parentElement.querySelector('svg');
           const id = `${textContent}_${obj.type}-${index}`.toLowerCase();
@@ -381,11 +378,11 @@ class StructEditor extends Component {
           obj?.r && newSVG.setAttribute('r', obj.r);
 
           if (obj.type === 'circle') {
-            newSVG.setAttribute('cx', element.getAttribute('x'));
-            newSVG.setAttribute('cy', element.getAttribute('y'));
+            newSVG.setAttribute('cx', x);
+            newSVG.setAttribute('cy', y);
           } else if (obj.type === 'rect') {
-            newSVG.setAttribute('x', element.getAttribute('x'));
-            newSVG.setAttribute('y', element.getAttribute('y'));
+            newSVG.setAttribute('x', x);
+            newSVG.setAttribute('y', y);
             newSVG.setAttribute('height', obj.height);
             newSVG.setAttribute('width', obj.width);
           }
