@@ -368,7 +368,7 @@ class StructEditor extends Component {
           }
           const newSVG = document.createElementNS(
             'http://www.w3.org/2000/svg',
-            obj.type, //ID of initials
+            obj.type, // ID of initials
           );
           // default
           newSVG.setAttribute('id', id);
