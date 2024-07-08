@@ -14,7 +14,7 @@
  * limitations under the License.
  ***************************************************************************/
 
-import { Component, createRef } from 'react';
+import React, { Component, createRef } from 'react';
 
 import Editor from '../../../../editor';
 import { LoadingCircles } from '../Spinner/LoadingCircles';
@@ -31,6 +31,84 @@ import InfoPanel from './InfoPanel';
 import { KetcherLogger, ketcherProvider } from 'ketcher-core';
 import { getSmoothScrollDelta } from './helpers';
 import InfoTooltip from './InfoTooltip';
+
+const shapesList = {
+  BB: {
+    type: 'rect',
+    width: 100,
+    height: 40,
+    cx: 0,
+    cy: 0,
+    rx: 5,
+    ry: 5,
+    fill: '#4472c4',
+  },
+  BS: {
+    type: 'rect',
+    width: 100,
+    height: 40,
+    cx: 0,
+    cy: 0,
+    rx: 5,
+    ry: 5,
+    fill: '#757070',
+  },
+  BP: {
+    type: 'rect',
+    width: 100,
+    height: 40,
+    cx: 0,
+    cy: 0,
+    rx: 5,
+    ry: 5,
+    fill: '#fff',
+    stroke: '#000',
+    strokeWidth: 3,
+  },
+  SSP: {
+    type: 'rect',
+    width: 100,
+    height: 40,
+    cx: 0,
+    cy: 0,
+    stroke: 'rgb(186, 140, 0)',
+    strokeWidth: 3,
+    fill: 'rgb(255, 192, 0)',
+    // fill: '#757070',
+  },
+  SMP: {
+    type: 'rect',
+    width: 100,
+    height: 40,
+    cx: 0,
+    cy: 0,
+    fill: '#757070',
+    stroke: 'rgb(186, 140, 0)',
+    strokeWidth: 3,
+    fill: 'rgb(255, 255, 255)',
+  },
+  APP: {
+    type: 'circle',
+    r: 25,
+    stroke: '#ac5b23',
+    strokeWidth: 3,
+    fill: '#ed7d31',
+  },
+  APB: {
+    type: 'circle',
+    r: 40,
+    stroke: '#31538f',
+    strokeWidth: 3,
+    fill: '#4472c4',
+  },
+  APLB: {
+    type: 'circle',
+    r: 40,
+    stroke: '#31538f',
+    strokeWidth: 3,
+    fill: '#d8e2f3',
+  },
+};
 
 // TODO: need to update component after making refactoring of store
 function setupEditor(editor, props, oldProps = {}) {
@@ -265,12 +343,16 @@ class StructEditor extends Component {
       '._intermediateCanvas_6mm9g_128',
     );
     const svgElement = parentElement.querySelector('svg');
-
     const textElements = this.editorRef.current.querySelectorAll('text');
 
-    // Iterate over the NodeList and log elements containing the letter "R" or "r"
     textElements.forEach((element, index) => {
-      if (/r/i.test(element.textContent)) {
+      const textContent = element.textContent.split('_')[0];
+      const obj = shapesList[textContent];
+      const matches = Object.keys(shapesList).some((pattern) =>
+        new RegExp(pattern).test(textContent),
+      );
+
+      if (matches) {
         const x = element.getAttribute('x');
         const y = element.getAttribute('y');
         const transform = element.getAttribute('transform');
@@ -278,30 +360,43 @@ class StructEditor extends Component {
 
         if (svgElement) {
           const svgElement = parentElement.querySelector('svg');
-          const circleId = `circle-${index}`; // Define a unique ID for the circle
+          const id = `${textContent}_${obj.type}-${index}`.toLowerCase();
 
           // Remove existing circle with the same ID
-          const existingCircle = svgElement.querySelector(
-            `#myCirlceLove${element.textContent}`,
-          );
-          if (existingCircle) {
-            svgElement.removeChild(existingCircle);
+          const existingShape = svgElement.querySelector(`#${id}`);
+
+          if (existingShape) {
+            svgElement.removeChild(existingShape);
           }
-          // Create a new SVG circle element
-          const newCircle = document.createElementNS(
+          const newSVG = document.createElementNS(
             'http://www.w3.org/2000/svg',
-            'circle',
+            obj.type, //ID of initials
           );
-          newCircle.setAttribute('id', 'myCirlceLove' + element.textContent);
-          newCircle.setAttribute('cx', x);
-          newCircle.setAttribute('cy', y);
-          newCircle.setAttribute('r', '20');
-          newCircle.setAttribute('stroke', 'red');
-          newCircle.setAttribute('stroke-width', '3');
-          newCircle.setAttribute('fill', 'red');
-          newCircle.setAttribute('transform', transform);
-          // Append the new circle to the SVG
-          svgElement.appendChild(newCircle);
+          // default
+          newSVG.setAttribute('id', id);
+          newSVG.setAttribute('stroke', obj.stroke);
+          newSVG.setAttribute('stroke-width', obj.strokeWidth);
+          newSVG.setAttribute('fill', obj.fill);
+          // conditional
+          obj?.r && newSVG.setAttribute('r', obj.r);
+
+          if (obj.type === 'circle') {
+            newSVG.setAttribute('cx', element.getAttribute('x'));
+            newSVG.setAttribute('cy', element.getAttribute('y'));
+          } else if (obj.type === 'rect') {
+            newSVG.setAttribute('x', element.getAttribute('x'));
+            newSVG.setAttribute('y', element.getAttribute('y'));
+            newSVG.setAttribute('height', obj.height);
+            newSVG.setAttribute('width', obj.width);
+          }
+
+          obj?.rx && newSVG.setAttribute('rx', obj.rx);
+          obj?.ry && newSVG.setAttribute('ry', obj.ry);
+
+          // transform
+          newSVG.setAttribute('transform', element.getAttribute('transform'));
+          // apend
+          svgElement.appendChild(newSVG);
         }
       }
     });

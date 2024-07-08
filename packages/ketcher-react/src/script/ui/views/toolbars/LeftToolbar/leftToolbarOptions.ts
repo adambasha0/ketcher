@@ -8,6 +8,17 @@ const rGroupOptions: ToolbarItem[] = makeItems([
   'rgroup-attpoints',
 ]);
 
+const shapesAllOptions: ToolbarItem[] = makeItems([
+  'Body_Blue',
+  'Body_Solid',
+  'Body_Porous',
+  'Support_Single_Phase',
+  'Support_Multi_Phase',
+  'Active_Phase_Promotors',
+  'Active_Phase_Blue',
+  'Active_Phase_Light_Blue',
+]);
+
 const shapeOptions: ToolbarItem[] = makeItems([
   'shape-ellipse',
   'shape-rectangle',
@@ -62,4 +73,5 @@ export {
   selectOptions,
   arrowsOptions,
   mappingOptions,
+  shapesAllOptions,
 };

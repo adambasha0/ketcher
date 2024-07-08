@@ -301,6 +301,46 @@ const toolActions = {
     action: { tool: 'simpleobject', opts: SimpleObjectMode.rectangle },
     hidden: (options) => isHidden(options, 'shape-rectangle'),
   },
+  Body_Blue: {
+    title: 'Standard Body Surface',
+    action: { tool: 'Body_Blue' },
+    hidden: (options) => isHidden(options, 'Body_Blue'),
+  },
+  Body_Solid: {
+    title: 'Body Solid',
+    action: { tool: 'Body_Solid' },
+    hidden: (options) => isHidden(options, 'Body_Solid'),
+  },
+  Body_Porous: {
+    title: 'Body Porous',
+    action: { tool: 'Body_Porous' },
+    hidden: (options) => isHidden(options, 'Body_Porous'),
+  },
+  Support_Single_Phase: {
+    title: 'Support Single Phase',
+    action: { tool: 'Support_Single_Phase' },
+    hidden: (options) => isHidden(options, 'Support_Single_Phase'),
+  },
+  Support_Multi_Phase: {
+    title: 'Support Multi Phase',
+    action: { tool: 'Support_Multi_Phase' },
+    hidden: (options) => isHidden(options, 'Support_Multi_Phase'),
+  },
+  Active_Phase_Promotors: {
+    title: 'Active Phase Promotors',
+    action: { tool: 'Active_Phase_Promotors' },
+    hidden: (options) => isHidden(options, 'Active_Phase_Promotors'),
+  },
+  Active_Phase_Blue: {
+    title: 'Active Phase Blue',
+    action: { tool: 'Active_Phase_Blue' },
+    hidden: (options) => isHidden(options, 'Active_Phase_Blue'),
+  },
+  Active_Phase_Light_Blue: {
+    title: 'Active Phase Light Blue',
+    action: { tool: 'Active_Phase_Light_Blue' },
+    hidden: (options) => isHidden(options, 'Active_Phase_Light_Blue'),
+  },
   'shape-line': {
     title: 'Shape Line',
     action: { tool: 'simpleobject', opts: SimpleObjectMode.line },

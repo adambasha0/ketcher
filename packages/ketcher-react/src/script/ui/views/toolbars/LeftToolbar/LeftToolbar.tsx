@@ -29,6 +29,7 @@ import {
   bondStereo,
   mappingOptions,
   rGroupOptions,
+  shapesAllOptions,
   selectOptions,
   shapeOptions,
   surfaceOptions,
@@ -38,6 +39,7 @@ import { ArrowScroll } from '../ArrowScroll';
 import { Bond } from './Bond';
 import { RGroup } from './RGroup';
 import { Shape } from './Shape';
+import { ShapesAll } from './ShapesAll';
 import { Surface } from './Surface';
 import classes from './LeftToolbar.module.less';
 import clsx from 'clsx';
@@ -110,6 +112,8 @@ const LeftToolbar = (props: Props) => {
               return <Shape {...rest} key={item.id} />;
             case 'surfaces':
               return <Surface {...rest} key={item.id} />;
+            case 'Body_Blue':
+              return <ShapesAll {...rest} key={item.id} />;
             case 'bonds':
               return (
                 <Item
@@ -171,6 +175,13 @@ const LeftToolbar = (props: Props) => {
           <Group
             className={classes.groupItem}
             items={[{ id: 'sgroup' }, { id: 'rgroup', options: rGroupOptions }]}
+          />
+        </div>
+
+        <div className={classes.listener} ref={sizeRef}>
+          <Group
+            className={classes.groupItem}
+            items={[{ id: 'shapesall', options: shapesAllOptions }]}
           />
         </div>
 

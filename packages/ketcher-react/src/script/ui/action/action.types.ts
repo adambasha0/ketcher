@@ -96,6 +96,15 @@ type ToolVariant =
   | 'shape-rectangle'
   | 'shape-polyline'
   | 'shape-line'
+  | 'shapesall'
+  | 'Body_Blue'
+  | 'Body_Solid'
+  | 'Body_Porous'
+  | 'Support_Single_Phase'
+  | 'Support_Multi_Phase'
+  | 'Active_Phase_Promotors'
+  | 'Active_Phase_Blue'
+  | 'Active_Phase_Light_Blue'
   | 'undo';
 
 // todo: find out types

@@ -20,6 +20,7 @@ import classes from './ActionButton.module.less';
 import clsx from 'clsx';
 import { shortcutStr } from 'ketcher-core';
 import { Icon, IconName } from 'components';
+import { useShapesContext } from 'src/hooks';
 
 interface ActionButtonProps {
   name: IconName;
@@ -54,6 +55,7 @@ const ActionButton = (props: Props) => {
     dataTestId,
   } = props;
 
+  const context = useShapesContext();
   if (status.hidden) {
     return null;
   }
@@ -73,7 +75,12 @@ const ActionButton = (props: Props) => {
     <button
       data-testid={dataTestId || name}
       disabled={disabled}
-      onClick={handleClick}
+      onClick={() => {
+        handleClick();
+        let alias = '';
+        name.split('_').map((chunk) => (alias += chunk[0]));
+        localStorage.setItem('shape_name', alias);
+      }}
       title={shortcut ? `${action?.title} (${shortcut})` : action?.title}
       className={clsx(
         classes.button,

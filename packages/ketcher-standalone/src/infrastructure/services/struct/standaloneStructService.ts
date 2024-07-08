@@ -231,7 +231,6 @@ class IndigoService implements StructService {
   info(): Promise<InfoResult> {
     return new Promise((resolve, reject) => {
       const action = ({ data }: OutputMessageWrapper) => {
-        console.log('info action', data);
         const msg: OutputMessage<string> = data;
         if (!msg.hasError) {
           const result: InfoResult = {
@@ -265,7 +264,6 @@ class IndigoService implements StructService {
 
     return new Promise((resolve, reject) => {
       const action = ({ data }: OutputMessageWrapper) => {
-        console.log('convert action', data);
         const msg: OutputMessage<string> = data;
         if (msg.inputData === struct) {
           if (!msg.hasError) {
@@ -318,7 +316,6 @@ class IndigoService implements StructService {
         format: string;
         original_format: ChemicalMimeType;
       }>) => {
-        console.log('layout action', data);
         const msg: OutputMessage<{
           struct: string;
           format: string;

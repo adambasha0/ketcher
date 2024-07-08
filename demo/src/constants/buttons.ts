@@ -55,6 +55,7 @@ export const allButtons = [
   'shape-ellipse',
   'shape-rectangle',
   'shape-line',
+  'shapesall',
   // surface group
   'surfaces',
   'surface-filled',

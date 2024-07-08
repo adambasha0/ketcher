@@ -69,10 +69,19 @@ export type ButtonName =
   | 'shape-ellipse'
   | 'shape-rectangle'
   | 'shape-line'
+  | 'shapes-all'
   // surface group
   | 'surfaces'
   | 'surface-filled'
   | 'rectangle-surface'
+  | 'Body_Blue'
+  | 'Body_Solid'
+  | 'Body_Porous'
+  | 'Support_Single_Phase'
+  | 'Support_Multi_Phase'
+  | 'Active_Phase_Promotors'
+  | 'Active_Phase_Blue'
+  | 'Active_Phase_Light_Blue'
   // text group
   | 'text'
   // right

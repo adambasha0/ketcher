@@ -16,7 +16,6 @@ const useAtomEdit = () => {
       const atoms = mapAtomIdsToAtoms(atomIds, molecule);
 
       const newAtom = editor.event.elementEdit.dispatch(atoms);
-
       updateSelectedAtoms({
         atoms: atomIds,
         changeAtomPromise: newAtom,

@@ -25,6 +25,7 @@ import EraserTool from './eraser';
 import HandTool from './hand';
 import PasteTool from './paste';
 import RGroupAtomTool from './rgroupatom';
+import ShapesAllAtomTool from './shapesall';
 import RGroupFragmentTool from './rgroupfragment';
 import ReactionArrowTool from './reactionarrow';
 import ReactionMapTool from './reactionmap';
@@ -41,6 +42,15 @@ import { ToolConstructorInterface } from './Tool';
 export const toolsMap: Record<string, ToolConstructorInterface> = {
   hand: HandTool,
   rgroupatom: RGroupAtomTool,
+  shapesall: ShapesAllAtomTool,
+  Body_Blue: ShapesAllAtomTool,
+  Body_Solid: ShapesAllAtomTool,
+  Body_Porous: ShapesAllAtomTool,
+  Support_Single_Phase: ShapesAllAtomTool,
+  Support_Multi_Phase: ShapesAllAtomTool,
+  Active_Phase_Promotors: ShapesAllAtomTool,
+  Active_Phase_Blue: ShapesAllAtomTool,
+  Active_Phase_Light_Blue: ShapesAllAtomTool,
   select: SelectTool,
   sgroup: SGroupTool,
   eraser: EraserTool,

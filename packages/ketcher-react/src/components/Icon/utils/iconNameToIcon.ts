@@ -226,6 +226,19 @@ import FlexLayoutIcon from '../../../assets/icons/files/flex-layout-mode.svg';
 import SnakeLayoutIcon from '../../../assets/icons/files/snake-layout-mode.svg';
 import SequenceLayoutIcon from '../../../assets/icons/files/sequence-layout-mode.svg';
 
+// SVG for surface chemistry shapes...
+import BodyBlueIcon from '../../../assets/icons/files/shapes/body_solid_blue.svg';
+import BodySolidIcon from '../../../assets/icons/files/shapes/body_solid.svg';
+import BodyPorousIcon from '../../../assets/icons/files/shapes/body_porous.svg';
+
+import SupportSinglePhaseIcon from '../../../assets/icons/files/shapes/support_single_phase.svg';
+import SupportMultiPhaseIcon from '../../../assets/icons/files/shapes/support_multi_phase.svg';
+
+import ActivePhasePromotorsIcon from '../../../assets/icons/files/shapes/activePhase_promotors.svg';
+import ActivePhaseBlueIcon from '../../../assets/icons/files/shapes/activePhase_blue.svg';
+
+import ActivePhaseLightBlueIcon from '../../../assets/icons/files/shapes/activePhase_light_blue.svg';
+
 export const iconNameToIcon = {
   α,
   β,
@@ -450,4 +463,15 @@ export const iconNameToIcon = {
   'flex-layout-mode': FlexLayoutIcon,
   'snake-layout-mode': SnakeLayoutIcon,
   'sequence-layout-mode': SequenceLayoutIcon,
+
+  // shapes-icon-list
+  Body_Blue: BodyBlueIcon,
+  Body_Solid: BodySolidIcon,
+  Body_Porous: BodyPorousIcon,
+  Support_Single_Phase: SupportSinglePhaseIcon,
+  Support_Multi_Phase: SupportMultiPhaseIcon,
+  Active_Phase_Promotors: ActivePhasePromotorsIcon,
+  Active_Phase_Blue: ActivePhaseBlueIcon,
+  Active_Phase_Light_Blue: ActivePhaseLightBlueIcon,
+  shapesall: ShapePolylineIcon,
 } as const;

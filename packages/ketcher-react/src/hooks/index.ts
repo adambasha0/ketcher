@@ -17,6 +17,7 @@
 export * from './useSettingsContext';
 export * from './useResizeObserver';
 export * from './useFormContext';
+export * from './useShapesContext';
 export * from './useAppContext';
 export * from './useInterval';
 export * from './useSubscribtionOnEvents';

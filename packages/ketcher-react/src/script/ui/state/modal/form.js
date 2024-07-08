@@ -87,6 +87,13 @@ export const formsState = {
       values: [],
     },
   },
+  shapesall: {
+    errors: {},
+    valid: true,
+    result: {
+      values: [],
+    },
+  },
   rgroupLogic: {
     errors: {},
     valid: true,
