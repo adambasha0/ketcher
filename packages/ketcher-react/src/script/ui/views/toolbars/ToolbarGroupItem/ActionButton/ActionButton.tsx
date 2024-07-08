@@ -20,7 +20,6 @@ import classes from './ActionButton.module.less';
 import clsx from 'clsx';
 import { shortcutStr } from 'ketcher-core';
 import { Icon, IconName } from 'components';
-import { useShapesContext } from 'src/hooks';
 
 interface ActionButtonProps {
   name: IconName;

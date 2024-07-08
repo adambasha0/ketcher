@@ -360,6 +360,7 @@ class StructEditor extends Component {
           const id = `${textContent}_${obj.type}-${index}`.toLowerCase();
 
           // Remove existing circle with the same ID
+
           const existingShape = svgElement.querySelector(`#${id}`);
 
           if (existingShape) {
