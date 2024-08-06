@@ -385,8 +385,12 @@
           "items": {
             "type": "object",
             "properties": {
-              "key": { "type": "string" },
-              "value": { "type": "string" }
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
             }
           }
         },
@@ -402,6 +406,9 @@
               },
               {
                 "$ref": "#/definitions/atomlist"
+              },
+              {
+                "$ref": "#/definitions/complexObject"
               }
             ]
           }
@@ -818,6 +825,31 @@
         "data": {
           "type": "string",
           "minLength": 160
+        }
+      }
+    },
+    "complexObject": {
+      "type": "object",
+      "required": ["type", "location"],
+      "properties": {
+        "type": {
+          "const": "complex-object"
+        },
+        "location": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "number"
+          }
+        },
+        "visual": {
+          "type": "string",
+          "pattern": "^data:image\\/(png|jpeg|gif|svg\\+xml);base64,[A-Za-z0-9+/=]+$"
+        },
+        "attachmentPoints": {
+          "type": "integer",
+          "enum": [0, 1, 2, 3]
         }
       }
     }
