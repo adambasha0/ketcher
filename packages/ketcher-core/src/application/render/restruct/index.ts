@@ -28,6 +28,7 @@ import ReSGroup from './resgroup';
 import ReSimpleObject from './resimpleObject';
 import ReStruct from './restruct';
 import ReText from './retext';
+import ReComplexObject from './recomplexobject';
 
 export * from './generalEnumTypes';
 export * from './reatom';
@@ -46,4 +47,5 @@ export {
   ReSimpleObject,
   ReText,
   ReStruct,
+  ReComplexObject,
 };

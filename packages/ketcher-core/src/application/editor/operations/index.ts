@@ -28,6 +28,7 @@ export * from './LoopMove';
 export * from './OperationType';
 export * from './image';
 export * from './rgroup';
+export * from './complexobject';
 export * from './rgroupAttachmentPoint';
 export * from './rxn';
 export * from './simpleObject';

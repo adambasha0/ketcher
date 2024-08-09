@@ -32,11 +32,13 @@ import {
   rGroupOptions,
   selectOptions,
   shapeOptions,
+  complexobjectOptions,
 } from './leftToolbarOptions';
 
 import { ArrowScroll } from '../ArrowScroll';
 import { Bond } from './Bond';
 import { RGroup } from './RGroup';
+import { ComplexObject } from './ComplexObject';
 import { Shape } from './Shape';
 import classes from './LeftToolbar.module.less';
 import clsx from 'clsx';
@@ -107,6 +109,8 @@ const LeftToolbar = (props: Props) => {
               return <RGroup {...rest} key={item.id} />;
             case 'shapes':
               return <Shape {...rest} key={item.id} />;
+            case 'complexobject':
+              return <ComplexObject {...rest} key={item.id} />;
             case 'bonds':
               return (
                 <Item
@@ -190,6 +194,16 @@ const LeftToolbar = (props: Props) => {
               { id: 'shapes', options: shapeOptions },
               { id: 'text' },
               { id: IMAGE_KEY },
+            ]}
+          />
+        </div>
+
+        <div className={classes.listener} ref={sizeRef}>
+          <Group
+            className={classes.groupItem}
+            items={[
+              { id: 'complexobject' },
+              { id: 'complexobject', options: complexobjectOptions },
             ]}
           />
         </div>

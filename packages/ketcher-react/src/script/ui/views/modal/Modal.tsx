@@ -44,7 +44,6 @@ function Modal(props: Props) {
   if (!modal) return null;
 
   const Component = modals[modal.name];
-
   if (!Component)
     throw new Error(`There is no modal window named ${modal.name}`);
 

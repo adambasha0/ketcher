@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ***************************************************************************/
-import { IMAGE_KEY } from 'ketcher-core';
+import { ComplexObjectAttr, IMAGE_KEY } from 'ketcher-core';
 
 import APointTool from './apoint';
 import AtomTool from './atom';
@@ -27,6 +27,7 @@ import HandTool from './hand';
 import PasteTool from './paste';
 import RGroupAtomTool from './rgroupatom';
 import RGroupFragmentTool from './rgroupfragment';
+import ComplexObjectTool from './complexobject';
 import ReactionArrowTool from './reactionarrow';
 import ReactionMapTool from './reactionmap';
 import ReactionPlusTool from './reactionplus';
@@ -63,5 +64,6 @@ export const toolsMap: Record<string, ToolConstructorInterface> = {
   enhancedStereo: EnhancedStereoTool,
   simpleobject: SimpleObjectTool,
   text: TextTool,
+  complexobject: ComplexObjectTool,
   [IMAGE_KEY]: ImageTool,
 };

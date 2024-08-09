@@ -80,6 +80,7 @@ export default function initEditor(dispatch, getState) {
         }).then(toElement);
       }
       const elem = selem.type === 'text' ? selem : fromElement(selem);
+      console.log({ elem });
       let dlg = null;
       if (elem.type === 'text') {
         // TODO: move textdialog opening logic to another place
@@ -96,6 +97,17 @@ export default function initEditor(dispatch, getState) {
           !elem.pseudo ? 'period-table' : 'extended-table',
           { ...elem, pseudo: elem.pseudo },
         );
+      } else if (elem.type === 'complexobject') {
+        const rgroups = getState().editor.struct().rgroups;
+        const params = {
+          type: 'complexobject',
+          values: elem.values,
+          disabledIds: [],
+        };
+        dlg = openDialog(dispatch, 'complexobject', params).then((res) => ({
+          values: res.values,
+          type: 'complexobject',
+        }));
       } else if (elem.type === 'rlabel') {
         const rgroups = getState().editor.struct().rgroups;
         const params = {

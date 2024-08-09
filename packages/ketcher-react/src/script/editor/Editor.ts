@@ -66,6 +66,7 @@ const structObjects: Array<keyof typeof ReStruct.maps> = [
   'rxnPluses',
   'enhancedFlags',
   'simpleObjects',
+  'complexobject',
   'texts',
   IMAGE_KEY,
 ];
@@ -85,6 +86,7 @@ const highlightTargets = [
   'enhancedFlags',
   'simpleObjects',
   'texts',
+  'complexobject',
   IMAGE_KEY,
 ];
 

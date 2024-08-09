@@ -20,6 +20,8 @@ const selectOptions: ToolbarItem[] = makeItems([
   'select-fragment',
 ]);
 
+const complexobjectOptions: ToolbarItem[] = makeItems(['complexobject']);
+
 const arrowsOptions: ToolbarItem[] = makeItems([
   'reaction-arrow-open-angle',
   'reaction-arrow-filled-triangle',
@@ -56,4 +58,5 @@ export {
   selectOptions,
   arrowsOptions,
   mappingOptions,
+  complexobjectOptions,
 };

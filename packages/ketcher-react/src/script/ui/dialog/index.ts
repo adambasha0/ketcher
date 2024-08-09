@@ -37,6 +37,7 @@ import PeriodTable from '../views/modal/components/PeriodTable';
 import ExtendedTable from '../views/modal/components/ExtendedTable';
 import { RemoveFG } from '../views/modal/components/toolbox/FG/RemoveFG';
 import Rgroup from './toolbox/rgroup/rgroup';
+import ComplexObject from './toolbox/complexobject/complexobject';
 import SGroup from './toolbox/sgroup';
 import TemplateAttach from './template/template-attach';
 import TemplatesDialog from './template/TemplateDialog';
@@ -51,6 +52,7 @@ export default {
   'period-table': PeriodTable,
   'extended-table': ExtendedTable,
   rgroup: Rgroup,
+  complexobject: ComplexObject,
   attach: TemplateAttach,
   templates: TemplatesDialog,
   about: About,

@@ -111,6 +111,7 @@ export const getSelectionFromStruct = (struct) => {
     'texts',
     'rgroupAttachmentPoints',
     'simpleObjects',
+    'complexobject',
   ].forEach((selectionEntity) => {
     if (struct && struct[selectionEntity]) {
       const selected: number[] = [];

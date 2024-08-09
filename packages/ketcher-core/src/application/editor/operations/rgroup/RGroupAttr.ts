@@ -53,7 +53,6 @@ export class RGroupAttr extends BaseOperation {
       }
 
       rgp[attribute] = value;
-
       BaseOperation.invalidateItem(restruct, 'rgroups', rgid);
     }
   }

@@ -36,6 +36,7 @@ import ReRxnArrow from './rerxnarrow';
 import ReRxnPlus from './rerxnplus';
 import ReSGroup from './resgroup';
 import ReSimpleObject from './resimpleObject';
+import ReComplexObject from './recomplexobject';
 import ReText from './retext';
 import { Render } from '../raphaelRender';
 import Visel from './visel';
@@ -60,6 +61,7 @@ class ReStruct {
     simpleObjects: ReSimpleObject,
     texts: ReText,
     [IMAGE_KEY]: ReImage,
+    complexobject: ReComplexObject,
   } as const;
 
   public render: Render;
@@ -71,6 +73,7 @@ class ReStruct {
   public rxnArrows: Map<number, ReRxnArrow> = new Map();
   public frags: Pool = new Pool();
   public rgroups: Pool = new Pool();
+  public complexobject: Pool = new Pool();
   public rgroupAttachmentPoints: Pool<ReRGroupAttachmentPoint> = new Pool();
 
   public sgroups: Map<number, ReSGroup> = new Map();
@@ -143,6 +146,10 @@ class ReStruct {
     molecule.rgroups.forEach((item, id) => {
       this.rgroups.set(id, new ReRGroup(item));
     });
+
+    // molecule.complexobject.forEach((item, id) => {
+    //   this.complexobject.set(id, new ReComplexObject(item));
+    // });
 
     molecule.rgroupAttachmentPoints.forEach(
       (item: RGroupAttachmentPoint, id: number) => {

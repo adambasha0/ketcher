@@ -69,6 +69,7 @@ export type ButtonName =
   | 'shape-ellipse'
   | 'shape-rectangle'
   | 'shape-line'
+  | 'complexobject'
   // text group
   | 'text'
   // right

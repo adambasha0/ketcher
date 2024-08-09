@@ -311,6 +311,11 @@ const toolActions = {
     action: { tool: 'simpleobject', opts: SimpleObjectMode.line },
     hidden: (options) => isHidden(options, 'shape-line'),
   },
+  complexobject: {
+    title: 'Complex Objects',
+    action: { tool: 'complexobject' },
+    hidden: (options) => isHidden(options, 'complexobject'),
+  },
   text: {
     shortcut: 'Alt+t',
     title: 'Add text',

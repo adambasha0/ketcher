@@ -55,6 +55,8 @@ export const allButtons = [
   'shape-ellipse',
   'shape-rectangle',
   'shape-line',
+  // complex object group
+  'complexobject',
   // text group
   'text',
   // right
@@ -121,6 +123,7 @@ export const buttonLabelMap = {
   text: 'Add Text Tool',
   'enhanced-stereo': 'Stereochemistry',
   fullscreen: 'Full screen mode',
+  complexobject: 'complex object',
 };
 
 // Keys of buttons we initially hide in our demo app

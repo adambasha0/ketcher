@@ -406,6 +406,7 @@ export const iconNameToIcon = {
   'shape-rectangle': ShapeRectangleIcon,
   'shape-polyline': ShapePolylineIcon,
   'shape-line': ShapeLineIcon,
+  complexobject: ShapeLineIcon,
   'not-found': NotFoundIcon,
   'save-1': Save1Icon,
   'open-1': Open1Icon,

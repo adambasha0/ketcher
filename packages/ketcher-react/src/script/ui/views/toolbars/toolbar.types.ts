@@ -134,6 +134,8 @@ type LeftToolbarItemVariant =
   | 'shape-ellipse'
   | 'shape-rectangle'
   | 'shape-line'
+  // complexobject group
+  | 'complexobject'
   // text group
   | 'text'
   // image group

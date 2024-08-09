@@ -96,6 +96,7 @@ type ToolVariant =
   | 'shape-rectangle'
   | 'shape-polyline'
   | 'shape-line'
+  | 'complexobject'
   | 'undo';
 
 // todo: find out types
