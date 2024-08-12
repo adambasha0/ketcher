@@ -44,7 +44,7 @@ export function fromElement(selem) {
     return {
       type: 'complexobject',
       values: fromSurfaceChemistryList(),
-      // ...selem,
+      ...selem,
     };
   }
 
@@ -60,6 +60,7 @@ export function fromElement(selem) {
 
 export function toElement(elem) {
   if (elem.type === 'rlabel') {
+    console.log(toRlabel(elem.values), 'check');
     return {
       label: elem.values.length ? 'R#' : 'C',
       rglabel: elem.values.length === 0 ? null : toRlabel(elem.values),
@@ -67,9 +68,36 @@ export function toElement(elem) {
   }
 
   if (elem.type === 'complexobject') {
+    const idx = elem.values[0].id;
+    const matching_identifier = parseInt(Math.random() * 10);
+
+    const image_content = {
+      root: {
+        nodes: [
+          {
+            type: 'image',
+            format: 'image/svg+xml',
+            boundingBox: {
+              x: 3.8000000000000007,
+              y: -8.950000000000001,
+              z: 0,
+              width: 2.5,
+              height: 1.25,
+            },
+            data: elem.values[0].icon,
+            complexobject_identifier: matching_identifier,
+          },
+        ],
+        connections: [],
+        templates: [],
+      },
+    };
+
+    console.log('checking running!!!');
+
     return {
-      label: elem.values.length ? 'R#' : 'C',
-      rglabel: elem.values.length === 0 ? null : toRlabel(elem.values),
+      label: `complexobject_${idx}_${matching_identifier}`,
+      complexobjectlabel: elem.values.length === 0 ? null : idx,
     };
   }
 
@@ -309,64 +337,80 @@ function fromRlabel(rg) {
   return res;
 }
 
+const list = [
+  {
+    Filling: 'solid',
+    Color: 'Variations of Blue',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iIzQ0NzJjNCIgc3Ryb2tlPSIjMzE1MzhmIiBzdHJva2Utd2lkdGg9IjMiIC8+Cjwvc3ZnPgo=',
+    id: 1,
+  },
+  {
+    Filling: 'hatched',
+    Color: 'Variations of Blue',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibHVlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjUsNSIgLz4KPC9zdmc+Cg==',
+    id: 2,
+  },
+  {
+    Filling: 'solid, smaller size',
+    Color: 'Variations of Red',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzMCIgZmlsbD0iI2VkN2QzMSIgc3Ryb2tlPSIjYWM1YjIzIiBzdHJva2Utd2lkdGg9IjMiIC8+PC9zdmc+',
+    id: 3,
+  },
+  {
+    Filling: 'selection of colors',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQpIiAvPg0KICA8ZGVmcz4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOmJsdWU7c3RvcC1vcGFjaXR5OjEiIC8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOnJlZDtzdG9wLW9wYWNpdHk6MSIgLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQo8L3N2Zz4=',
+    id: 4,
+  },
+  {
+    Filling: 'Solid',
+    Color: 'Variations of Yellow',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZmZjMDAwIiBzdHJva2U9IiNiYThjMDAiIHN0cm9rZS13aWR0aD0iMyIgLz4NCjwvc3ZnPg0K',
+    id: 5,
+  },
+  {
+    Filling: 'solid, divided',
+    Color: 'Variations of Yellow',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNiYThjMDAiIHN0cm9rZS13aWR0aD0iMyIgLz4NCjwvc3ZnPg0K',
+    id: 6,
+  },
+  {
+    Filling: 'hatched',
+    Color: 'Variations of Yellow',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNiYThjMDAiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWRhc2hhcnJheT0iNSw1Ii8+DQo8L3N2Zz4=',
+    id: 7,
+  },
+  {
+    Filling: 'Draft',
+    Color: 'selection of colors',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB4PSIxMCIgeT0iMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIzMCIgcng9IjEwIiByeT0iMTAiIGZpbGw9InVybCgjZ3JhZGllbnQpIiAvPg0KICA8ZGVmcz4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOmdyZWVuO3N0b3Atb3BhY2l0eToxIiAvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjp5ZWxsb3c7c3RvcC1vcGFjaXR5OjEiIC8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCiAgPC9kZWZzPg0KPC9zdmc+',
+    id: 8,
+  },
+  {
+    Filling: 'Solid',
+    Color: 'Variations of Grey',
+    icon: 'Cjxzdmcgd2lkdGg9IjEwMCIgaGVpZ2h0PSI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iMTUiIGZpbGw9IiM3NTcwNzAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIzIiAvPgo8L3N2Zz4=',
+    id: 9,
+  },
+  {
+    Filling: 'hatched',
+    Color: 'Variations of Grey',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iNTAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIzIiAgc3Ryb2tlLWRhc2hhcnJheT0iNSw1Ii8+Cjwvc3ZnPg==',
+    id: 10,
+  },
+  {
+    Filling: 'Solid',
+    Color: 'Variations of white',
+    icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iNTAiIHJ4PSIxNSIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjMiIC8+Cjwvc3ZnPg==',
+    id: 11,
+  },
+];
+
 function fromSurfaceChemistryList() {
-  const list = [
-    {
-      Filling: 'solid',
-      Color: 'Variations of Blue',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0iIzQ0NzJjNCIgc3Ryb2tlPSIjMzE1MzhmIiBzdHJva2Utd2lkdGg9IjMiIC8+Cjwvc3ZnPgo=',
-    },
-    {
-      Filling: 'hatched',
-      Color: 'Variations of Blue',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibHVlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1kYXNoYXJyYXk9IjUsNSIgLz4KPC9zdmc+Cg==',
-    },
-    {
-      Filling: 'solid, smaller size',
-      Color: 'Variations of Red',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIzMCIgZmlsbD0iI2VkN2QzMSIgc3Ryb2tlPSIjYWM1YjIzIiBzdHJva2Utd2lkdGg9IjMiIC8+PC9zdmc+',
-    },
-    {
-      Filling: 'selection of colors',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCiAgPGNpcmNsZSBjeD0iNTAiIGN5PSI1MCIgcj0iNDAiIGZpbGw9InVybCgjZ3JhZGllbnQpIiAvPg0KICA8ZGVmcz4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOmJsdWU7c3RvcC1vcGFjaXR5OjEiIC8+DQogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOnJlZDtzdG9wLW9wYWNpdHk6MSIgLz4NCiAgICA8L2xpbmVhckdyYWRpZW50Pg0KICA8L2RlZnM+DQo8L3N2Zz4=',
-    },
-    {
-      Filling: 'Solid',
-      Color: 'Variations of Yellow',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZmZjMDAwIiBzdHJva2U9IiNiYThjMDAiIHN0cm9rZS13aWR0aD0iMyIgLz4NCjwvc3ZnPg0K',
-    },
-    {
-      Filling: 'solid, divided',
-      Color: 'Variations of Yellow',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNiYThjMDAiIHN0cm9rZS13aWR0aD0iMyIgLz4NCjwvc3ZnPg0K',
-    },
-    {
-      Filling: 'hatched',
-      Color: 'Variations of Yellow',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZmZmIiBzdHJva2U9IiNiYThjMDAiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWRhc2hhcnJheT0iNSw1Ii8+DQo8L3N2Zz4=',
-    },
-    {
-      Filling: 'Draft',
-      Color: 'selection of colors',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KICA8cmVjdCB4PSIxMCIgeT0iMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSIzMCIgcng9IjEwIiByeT0iMTAiIGZpbGw9InVybCgjZ3JhZGllbnQpIiAvPg0KICA8ZGVmcz4NCiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWRpZW50IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4NCiAgICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOmdyZWVuO3N0b3Atb3BhY2l0eToxIiAvPg0KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjp5ZWxsb3c7c3RvcC1vcGFjaXR5OjEiIC8+DQogICAgPC9saW5lYXJHcmFkaWVudD4NCiAgPC9kZWZzPg0KPC9zdmc+',
-    },
-    {
-      Filling: 'Solid',
-      Color: 'Variations of Grey',
-      icon: 'Cjxzdmcgd2lkdGg9IjEwMCIgaGVpZ2h0PSI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiByeD0iMTUiIGZpbGw9IiM3NTcwNzAiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIzIiAvPgo8L3N2Zz4=',
-    },
-    {
-      Filling: 'hatched',
-      Color: 'Variations of Grey',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iNTAiIGZpbGw9IiNmZmYiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIzIiAgc3Ryb2tlLWRhc2hhcnJheT0iNSw1Ii8+Cjwvc3ZnPg==',
-    },
-    {
-      Filling: 'Solid',
-      Color: 'Variations of white',
-      icon: 'PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iNTAiIHJ4PSIxNSIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjMiIC8+Cjwvc3ZnPg==',
-    },
-  ];
   return list;
+}
+
+function toSurfaceChemistryList(index) {
+  return list[index];
 }
 
 function toRlabel(values) {

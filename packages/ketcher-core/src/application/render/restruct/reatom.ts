@@ -292,6 +292,7 @@ class ReAtom extends ReObject {
     let index: any = null;
 
     if (this.showLabel) {
+      console.log('this.showlabel');
       const data = buildLabel(this, render.paper, ps, options, aid, sgroup);
       delta = 0.5 * options.lineWidth;
       label = data.label;
@@ -312,6 +313,8 @@ class ReAtom extends ReObject {
       restruct.addReObjectPath(LayerMap.data, this.visel, label.path, ps, true);
     }
     if (options.showAtomIds) {
+      console.log('this.showAtomIds');
+
       index = {};
       index.text = aid.toString();
       let idPos = this.hydrogenOnTheLeft
@@ -822,7 +825,7 @@ function buildLabel(
 
   if (label.text?.length > MAX_LABEL_LENGTH) {
     tooltip = label.text;
-    label.text = `${label.text?.substring(0, 8)}...`;
+    // label.text = `${label.text?.substring(0, 8)}...`;
   }
 
   const { previewOpacity } = options;
@@ -870,13 +873,7 @@ function buildLabel(
       ((atom.hydrogenOnTheLeft ? -1 : 1) *
         (label.rbb.width - label.rbb.height)) /
       2;
-    pathAndRBoxTranslate(
-      label.path,
-      label.rbb,
-      xShift,
-
-      0,
-    );
+    pathAndRBoxTranslate(label.path, label.rbb, xShift, 0);
     rightMargin += xShift;
     leftMargin += xShift;
   }

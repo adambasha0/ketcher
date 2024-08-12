@@ -78,7 +78,6 @@ export class Struct {
   texts: Pool<Text>;
   functionalGroups: Pool<FunctionalGroup>;
   highlights: Pool<Highlight>;
-
   constructor() {
     this.atoms = new Pool<Atom>();
     this.bonds = new Pool<Bond>();

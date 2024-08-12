@@ -283,7 +283,6 @@ class IndigoService implements StructService {
 
     return new Promise((resolve, reject) => {
       const action = ({ data }: OutputMessageWrapper) => {
-        console.log('convert action', data);
         const msg: OutputMessage<string> = data;
         if (msg.inputData === struct) {
           if (!msg.hasError) {

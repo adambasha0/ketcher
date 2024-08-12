@@ -109,6 +109,7 @@ import SettingsIcon from '../../../assets/icons/files/settings.svg';
 import SgroupIcon from '../../../assets/icons/files/sgroup.svg';
 import ShapeEllipseIcon from '../../../assets/icons/files/shape-ellipse.svg';
 import ShapeLineIcon from '../../../assets/icons/files/shape-line.svg';
+import ShapesIcon from '../../../assets/icons/files/shapes-surface-chem.svg';
 import ShapePolylineIcon from '../../../assets/icons/files/shape-polyline.svg';
 import ShapeRectangleIcon from '../../../assets/icons/files/shape-rectangle.svg';
 import Template0Icon from '../../../assets/icons/files/template-0.svg';
@@ -406,7 +407,7 @@ export const iconNameToIcon = {
   'shape-rectangle': ShapeRectangleIcon,
   'shape-polyline': ShapePolylineIcon,
   'shape-line': ShapeLineIcon,
-  complexobject: ShapeLineIcon,
+  complexobject: ShapesIcon,
   'not-found': NotFoundIcon,
   'save-1': Save1Icon,
   'open-1': Open1Icon,

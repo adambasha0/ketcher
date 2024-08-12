@@ -109,8 +109,8 @@ const LeftToolbar = (props: Props) => {
               return <RGroup {...rest} key={item.id} />;
             case 'shapes':
               return <Shape {...rest} key={item.id} />;
-            case 'complexobject':
-              return <ComplexObject {...rest} key={item.id} />;
+            // case 'complexobject':
+            //   return <ComplexObject {...rest} key={item.id} />;
             case 'bonds':
               return (
                 <Item
@@ -198,13 +198,10 @@ const LeftToolbar = (props: Props) => {
           />
         </div>
 
-        <div className={classes.listener} ref={sizeRef}>
+        <div ref={endRef}>
           <Group
             className={classes.groupItem}
-            items={[
-              { id: 'complexobject' },
-              { id: 'complexobject', options: complexobjectOptions },
-            ]}
+            items={[{ id: 'complexobject' }]}
           />
         </div>
       </div>

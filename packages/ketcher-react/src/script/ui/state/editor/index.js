@@ -80,7 +80,6 @@ export default function initEditor(dispatch, getState) {
         }).then(toElement);
       }
       const elem = selem.type === 'text' ? selem : fromElement(selem);
-      console.log({ elem });
       let dlg = null;
       if (elem.type === 'text') {
         // TODO: move textdialog opening logic to another place
