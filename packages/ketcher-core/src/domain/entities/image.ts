@@ -21,6 +21,7 @@ import { IMAGE_SERIALIZE_KEY } from 'domain/constants';
 
 export interface KetFileImageNode extends KetFileNode<string> {
   format: string;
+  _id: number;
   boundingBox: {
     x: number;
     y: number;
@@ -53,6 +54,7 @@ export class Image extends BaseMicromoleculeEntity {
     public bitmap: string,
     private _center: Vec2,
     private halfSize: Vec2,
+    private _id: number,
   ) {
     super();
   }
@@ -115,6 +117,7 @@ export class Image extends BaseMicromoleculeEntity {
       this.bitmap,
       new Vec2(this._center),
       new Vec2(this.halfSize),
+      this._id,
     );
   }
 
@@ -154,6 +157,7 @@ export class Image extends BaseMicromoleculeEntity {
         height: this.halfSize.y * 2,
       },
       data: base64Data,
+      _id: this._id,
       selected: this.getInitiallySelected(),
     };
   }
@@ -166,9 +170,9 @@ export class Image extends BaseMicromoleculeEntity {
     const topLeftCorner = new Vec2(point);
     const center = topLeftCorner.add(halfSize);
     const imageSrc = `data:${ketFileNode.format};base64,${ketFileNode.data}`;
-
+    const _id = ketFileNode._id;
     // Should be validated already
-    const image = new Image(imageSrc, center, halfSize);
+    const image = new Image(imageSrc, center, halfSize, _id);
     image.setInitiallySelected(ketFileNode.selected);
     return image;
   }

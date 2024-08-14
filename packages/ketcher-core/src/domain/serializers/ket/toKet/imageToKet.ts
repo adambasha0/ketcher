@@ -25,5 +25,6 @@ export function imageToKet(imageNode: KetFileNode) {
     boundingBox: (imageNode as KetFileImageNode).boundingBox,
     data: imageNode.data,
     selected: imageNode.selected,
+    _id: imageNode._id,
   };
 }

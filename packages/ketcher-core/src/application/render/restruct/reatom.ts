@@ -292,7 +292,6 @@ class ReAtom extends ReObject {
     let index: any = null;
 
     if (this.showLabel) {
-      console.log('this.showlabel');
       const data = buildLabel(this, render.paper, ps, options, aid, sgroup);
       delta = 0.5 * options.lineWidth;
       label = data.label;

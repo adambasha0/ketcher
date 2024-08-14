@@ -825,6 +825,9 @@
         "data": {
           "type": "string",
           "minLength": 160
+        },
+        "_id": {
+          "type": "number"
         }
       }
     },

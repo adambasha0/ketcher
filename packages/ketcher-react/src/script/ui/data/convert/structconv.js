@@ -69,32 +69,7 @@ export function toElement(elem) {
 
   if (elem.type === 'complexobject') {
     const idx = elem.values[0].id;
-    const matching_identifier = parseInt(Math.random() * 10);
-
-    const image_content = {
-      root: {
-        nodes: [
-          {
-            type: 'image',
-            format: 'image/svg+xml',
-            boundingBox: {
-              x: 3.8000000000000007,
-              y: -8.950000000000001,
-              z: 0,
-              width: 2.5,
-              height: 1.25,
-            },
-            data: elem.values[0].icon,
-            complexobject_identifier: matching_identifier,
-          },
-        ],
-        connections: [],
-        templates: [],
-      },
-    };
-
-    console.log('checking running!!!');
-
+    const matching_identifier = parseInt(Math.random() * 200);
     return {
       label: `complexobject_${idx}_${matching_identifier}`,
       complexobjectlabel: elem.values.length === 0 ? null : idx,
@@ -337,6 +312,15 @@ function fromRlabel(rg) {
   return res;
 }
 
+function toRlabel(values) {
+  let res = 0;
+  values.forEach((val) => {
+    const rgi = val - 1;
+    res |= 1 << rgi;
+  });
+  return res;
+}
+
 const list = [
   {
     Filling: 'solid',
@@ -411,15 +395,6 @@ function fromSurfaceChemistryList() {
 
 function toSurfaceChemistryList(index) {
   return list[index];
-}
-
-function toRlabel(values) {
-  let res = 0;
-  values.forEach((val) => {
-    const rgi = val - 1;
-    res |= 1 << rgi;
-  });
-  return res;
 }
 
 export function fromBond(sbond) {

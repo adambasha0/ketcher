@@ -14,9 +14,10 @@ export function fromImageCreation(
   bitmap: string,
   center: Vec2,
   halfSize: Vec2,
+  _id: number,
 ) {
   const action = new Action();
-  const image = new Image(bitmap, center, halfSize);
+  const image = new Image(bitmap, center, halfSize, _id);
   action.addOp(new ImageUpsert(image));
   return action.perform(reStruct);
 }

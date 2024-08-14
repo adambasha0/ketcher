@@ -166,7 +166,12 @@ export class ImageTool implements Tool {
           new Vec2(image.width / 2, image.height / 2),
           this.editor.render.options,
         );
-
+        console.log(
+          this.editor.render.ctab,
+          image.src,
+          clickPosition,
+          halfSize,
+        );
         this.editor.update(
           fromImageCreation(
             this.editor.render.ctab,

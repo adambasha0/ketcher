@@ -13,19 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ***************************************************************************/
-import { Struct, Vec2 } from 'domain/entities';
 
-export interface Serializer<T> {
-  deserialize: (content: string) => T;
-  serialize: (struct: T) => string;
-}
+import {
+  ToolbarGroupItem,
+  ToolbarGroupItemCallProps,
+  ToolbarGroupItemProps,
+} from '../../ToolbarGroupItem';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface KetFileNode<T = any> {
-  type: string;
-  fragment?: Struct;
-  center: Vec2;
-  data?: T;
-  selected?: boolean;
-  _id?: number;
+import { complexobjectOptions } from '../leftToolbarOptions';
+
+interface RGroupProps extends Omit<ToolbarGroupItemProps, 'id' | 'options'> {
+  height?: number;
 }
+type RGroupCallProps = ToolbarGroupItemCallProps;
+
+type Props = RGroupProps & RGroupCallProps;
+
+const ComplexObject = (props: Props) => {
+  return (
+    <ToolbarGroupItem
+      id="complexobject"
+      options={complexobjectOptions}
+      {...props}
+    />
+  );
+};
+
+export type { RGroupProps, RGroupCallProps };
+export { ComplexObject };
